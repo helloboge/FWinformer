@@ -1,9 +1,9 @@
-from data.data_loader import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom, Dataset_Pred
-from exp.exp_basic import Exp_Basic
-from models.model import Informer, InformerStack, FWinLite, FWin
+from FWin.data.data_loader import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom, Dataset_Pred
+from FWin.exp.exp_basic import Exp_Basic
+from FWin.models.model import Informer, InformerStack, FWinLite, FWin
 
-from utils.tools import EarlyStopping, adjust_learning_rate
-from utils.metrics import metric
+from FWin.utils.tools import EarlyStopping, adjust_learning_rate
+from FWin.utils.metrics import metric
 
 import numpy as np
 
@@ -102,6 +102,14 @@ class Exp_Model(Exp_Basic):
             'ECL': Dataset_Custom,
             'Solar': Dataset_Custom,
             'custom': Dataset_Custom,
+            'merdata2018': Dataset_Custom,
+            'tempe2020': Dataset_Custom,
+            'Tianchi_power': Dataset_Custom,
+            'rainning': Dataset_Custom,
+            'london_merged': Dataset_ETT_hour,
+            'df_co_imf0': Dataset_ETT_hour,
+            'df_co_imf1': Dataset_ETT_hour,
+            'df_co_imf2': Dataset_ETT_hour,
         }
         Data = data_dict[self.args.data]
 
@@ -172,6 +180,7 @@ class Exp_Model(Exp_Basic):
         vali_data, vali_loader = self._get_data(flag='val')
         test_data, test_loader = self._get_data(flag='test')
 
+        folder_path = '/kaggle/working/FWin/results/' + setting + '/pic/'
         path = os.path.join(self.args.checkpoints, setting)
         if not os.path.exists(path):
             os.makedirs(path)
@@ -237,6 +246,7 @@ class Exp_Model(Exp_Basic):
 
             adjust_learning_rate(model_optim, epoch+1, self.args)
 
+        np.save(folder_path + 'train_loss.npy', train_loss)
         best_model_path = path+'/'+'checkpoint.pth'
         self.model.load_state_dict(torch.load(best_model_path))
 
@@ -249,22 +259,30 @@ class Exp_Model(Exp_Basic):
 
         preds = []
         trues = []
+        inputs = []
 
         for i, (batch_x, batch_y, batch_x_mark, batch_y_mark) in enumerate(test_loader):
             pred, true = self._process_one_batch(
                 test_data, batch_x, batch_y, batch_x_mark, batch_y_mark)
+            inputs.append(batch_x.detach().cpu().numpy())
             preds.append(pred.detach().cpu().numpy())
             trues.append(true.detach().cpu().numpy())
 
         preds = np.array(preds)
         trues = np.array(trues)
+        inputs = np.array(inputs)
+
         print('test shape:', preds.shape, trues.shape)
         preds = preds.reshape(-1, preds.shape[-2], preds.shape[-1])
         trues = trues.reshape(-1, trues.shape[-2], trues.shape[-1])
+
+        inputs = inputs.reshape(-1, inputs.shape[-2], inputs.shape[-1])
+
         print('test shape:', preds.shape, trues.shape)
 
         # result save
-        folder_path = './results/' + setting + '/'
+        # folder_path = './results/' + setting + '/'
+        folder_path = '/kaggle/working/FWin/results/' + setting + '/pic/'
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
@@ -276,6 +294,8 @@ class Exp_Model(Exp_Basic):
         if self.args.save_prediction:
             np.save(folder_path+'pred.npy', preds)
             np.save(folder_path+'true.npy', trues)
+
+        np.save(folder_path + 'inputs.npy', inputs)
 
         return
 
@@ -311,7 +331,8 @@ class Exp_Model(Exp_Basic):
         trues = trues.reshape(-1, trues.shape[-2], trues.shape[-1])
 
         # result save
-        folder_path = './results/' + setting + '/'
+        # folder_path = './results/' + setting +'/'
+        folder_path = '/kaggle/working/Informer2020/results/' + setting + '/pic/'
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
         if self.args.save_prediction:
