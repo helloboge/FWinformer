@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import numpy as np
 
 from math import sqrt
-from FWin.utils.masking import TriangularCausalMask, ProbMask
+from FWinformer.utils.masking import TriangularCausalMask, ProbMask
 
 
 class FullAttention(nn.Module):

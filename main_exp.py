@@ -18,19 +18,19 @@ import time
 import numpy as np
 # import os
 # os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
-from FWin.exp.exp_model import Exp_Model
+from FWinformer.exp.exp_model import Exp_Model
 
 parser = argparse.ArgumentParser(description='[FWin] Long Sequences Forecasting')
 
 parser.add_argument('--model', type=str, default='fwin',help='model of experiment, options: [informer, informerstack, informerlight(TBD)]')
 
 parser.add_argument('--data', type=str, default='tempe2020', help='data')
-parser.add_argument('--root_path', type=str, default='/kaggle/working/FWin/dataset/', help='root path of the data file')  # csv文件路径
+parser.add_argument('--root_path', type=str, default='/kaggle/working/FWinformer/dataset/', help='root path of the data file')  # csv文件路径
 parser.add_argument('--data_path', type=str, default='Mixed_HWFET_25.csv', help='data file')  # csv文件  第一列必须为date
 parser.add_argument('--features', type=str, default='MS', help='forecasting task, options:[M, S, MS]; M:multivariate predict multivariate, S:univariate predict univariate, MS:multivariate predict univariate')
 parser.add_argument('--target', type=str, default='KW', help='target feature in S or MS task')  # 需要预测的特征
 parser.add_argument('--freq', type=str, default='h', help='freq for time features encoding, options:[s:secondly, t:minutely, h:hourly, d:daily, b:business days, w:weekly, m:monthly], you can also use more detailed freq like 15min or 3h')
-parser.add_argument('--checkpoints', type=str, default='/kaggle/working/FWin/checkpoints/', help='location of model checkpoints')
+parser.add_argument('--checkpoints', type=str, default='/kaggle/working/FWinformer/checkpoints/', help='location of model checkpoints')
 
 parser.add_argument('--seq_len', type=int, default=96, help='input sequence length of Informer encoder')
 parser.add_argument('--label_len', type=int, default=48, help='start token length of Informer decoder')

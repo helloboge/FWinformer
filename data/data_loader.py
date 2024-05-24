@@ -6,8 +6,8 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 # from sklearn.preprocessing import StandardScaler
 
-from FWin.utils.tools import StandardScaler
-from FWin.utils.timefeatures import time_features
+from FWinformer.utils.tools import StandardScaler
+from FWinformer.utils.timefeatures import time_features
 
 import warnings
 warnings.filterwarnings('ignore')

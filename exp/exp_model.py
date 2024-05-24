@@ -1,9 +1,9 @@
-from FWin.data.data_loader import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom, Dataset_Pred
-from FWin.exp.exp_basic import Exp_Basic
-from FWin.models.model import Informer, InformerStack, FWinLite, FWin
+from FWinformer.data.data_loader import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom, Dataset_Pred
+from FWinformer.exp.exp_basic import Exp_Basic
+from FWinformer.models.model import Informer, InformerStack, FWinLite, FWin
 
-from FWin.utils.tools import EarlyStopping, adjust_learning_rate
-from FWin.utils.metrics import metric
+from FWinformer.utils.tools import EarlyStopping, adjust_learning_rate
+from FWinformer.utils.metrics import metric
 
 import numpy as np
 
@@ -180,7 +180,7 @@ class Exp_Model(Exp_Basic):
         vali_data, vali_loader = self._get_data(flag='val')
         test_data, test_loader = self._get_data(flag='test')
 
-        folder_path = '/kaggle/working/FWin/results/' + setting + '/pic/'
+        folder_path = '/kaggle/working/FWinformer/results/' + setting + '/pic/'
         path = os.path.join(self.args.checkpoints, setting)
         if not os.path.exists(path):
             os.makedirs(path)
@@ -282,7 +282,7 @@ class Exp_Model(Exp_Basic):
 
         # result save
         # folder_path = './results/' + setting + '/'
-        folder_path = '/kaggle/working/FWin/results/' + setting + '/pic/'
+        folder_path = '/kaggle/working/FWinformer/results/' + setting + '/pic/'
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
@@ -332,7 +332,7 @@ class Exp_Model(Exp_Basic):
 
         # result save
         # folder_path = './results/' + setting +'/'
-        folder_path = '/kaggle/working/Informer2020/results/' + setting + '/pic/'
+        folder_path = '/kaggle/working/FWinformer/results/' + setting + '/pic/'
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
         if self.args.save_prediction:

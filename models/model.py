@@ -2,12 +2,12 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from FWin.utils.masking import TriangularCausalMask, ProbMask
-from FWin.models.encoder import Encoder, EncoderLayer, ConvLayer, EncoderStack
-from FWin.models.decoder import Decoder, DecoderLayer, DecoderLayerWithFourier
-from FWin.models.attn import FullAttention, ProbAttention, AttentionLayer, AttentionLayerWin, AttentionLayerCrossWin
-from FWin.models.embed import DataEmbedding
-from FWin.models.fourier import FNetLayer, FourierMix
+from FWinformer.utils.masking import TriangularCausalMask, ProbMask
+from FWinformer.models.encoder import Encoder, EncoderLayer, ConvLayer, EncoderStack
+from FWinformer.models.decoder import Decoder, DecoderLayer, DecoderLayerWithFourier
+from FWinformer.models.attn import FullAttention, ProbAttention, AttentionLayer, AttentionLayerWin, AttentionLayerCrossWin
+from FWinformer.models.embed import DataEmbedding
+from FWinformer.models.fourier import FNetLayer, FourierMix
 
 
 class Informer(nn.Module):
