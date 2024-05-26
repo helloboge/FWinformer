@@ -241,8 +241,8 @@ class Dataset_Custom(Dataset):   # 在244行和245行调整比例
             cols.remove('date')
         df_raw = df_raw[['date']+cols+[self.target]]
 
-        num_train = int(len(df_raw)* 0.85)  # 训练集比例
-        num_test = int(len(df_raw)* 0.08306) # 测试集比例
+        num_train = int(len(df_raw)* 0.7)  # 训练集比例0.85
+        num_test = int(len(df_raw)* 0.2) # 测试集比例0.08306
         num_vali = len(df_raw) - num_train - num_test # 验证集比例
         border1s = [0, num_train-self.seq_len,
                     len(df_raw)-num_test-self.seq_len]
