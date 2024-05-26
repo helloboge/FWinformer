@@ -180,7 +180,7 @@ class Exp_Model(Exp_Basic):
         vali_data, vali_loader = self._get_data(flag='val')
         test_data, test_loader = self._get_data(flag='test')
 
-        folder_path = '/kaggle/working/FWinformer/results/' + setting + '/pic/'
+        folder_path = '/kaggle/working/FWinformer/results/' + setting +'/'
         path = os.path.join(self.args.checkpoints, setting)
         if not os.path.exists(path):
             os.makedirs(path)
@@ -282,7 +282,7 @@ class Exp_Model(Exp_Basic):
 
         # result save
         # folder_path = './results/' + setting + '/'
-        folder_path = '/kaggle/working/FWinformer/results/' + setting + '/pic/'
+        folder_path = '/kaggle/working/FWinformer/results/' + setting +'/'
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
@@ -332,7 +332,7 @@ class Exp_Model(Exp_Basic):
 
         # result save
         # folder_path = './results/' + setting +'/'
-        folder_path = '/kaggle/working/FWinformer/results/' + setting + '/pic/'
+        folder_path = '/kaggle/working/FWinformer/results/' + setting +'/'
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
         if self.args.save_prediction:
