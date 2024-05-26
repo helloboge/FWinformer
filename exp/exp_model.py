@@ -185,6 +185,9 @@ class Exp_Model(Exp_Basic):
         if not os.path.exists(path):
             os.makedirs(path)
 
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
+
         time_now = time.time()
 
         train_steps = len(train_loader)
