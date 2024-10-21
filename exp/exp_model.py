@@ -104,6 +104,7 @@ class Exp_Model(Exp_Basic):
             'custom': Dataset_Custom,
             'merdata2018': Dataset_Custom,
             'tempe2020': Dataset_Custom,
+            'tempe20212023': Dataset_Custom,
             'Tianchi_power': Dataset_Custom,
             'rainning': Dataset_Custom,
             'london_merged': Dataset_ETT_hour,
