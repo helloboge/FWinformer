@@ -412,7 +412,11 @@ class Exp_Model(Exp_Basic):
             else:
                 outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
         if self.args.inverse:
-            outputs = dataset_object.inverse_transform(outputs)
+            if self.args.output_attention:
+                outputs = dataset_object.inverse_transform(outputs)
+                attn_output = dataset_object.inverse_transform(attn_output)
+            else:
+                outputs = dataset_object.inverse_transform(outputs)
         f_dim = -1 if self.args.features=='MS' else 0
         batch_y = batch_y[:,-self.args.pred_len:,f_dim:].to(self.device)
 
