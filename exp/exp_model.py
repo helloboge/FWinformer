@@ -251,6 +251,7 @@ class Exp_Model(Exp_Basic):
             adjust_learning_rate(model_optim, epoch+1, self.args)
 
         np.save(folder_path + 'train_loss.npy', train_loss)
+        np.save(folder_path + 'vali_loss.npy', vali_loss)
         best_model_path = path+'/'+'checkpoint.pth'
         self.model.load_state_dict(torch.load(best_model_path))
 
