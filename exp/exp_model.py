@@ -172,6 +172,7 @@ class Exp_Model(Exp_Basic):
                 vali_data, batch_x, batch_y, batch_x_mark, batch_y_mark)
             loss = criterion(pred.detach().cpu(), true.detach().cpu())
             total_loss.append(loss)
+        np.save(folder_path+'vali_all_loss.npy',total_loss)
         total_loss = np.average(total_loss)
         self.model.train()
         return total_loss
@@ -237,6 +238,7 @@ class Exp_Model(Exp_Basic):
 
             print("Epoch: {} cost time: {}".format(
                 epoch+1, time.time()-epoch_time))
+            np.save(folder_path+'train_all_loss.npy',train_loss)
             train_loss = np.average(train_loss)
             vali_loss = self.vali(vali_data, vali_loader, criterion)
             test_loss = self.vali(test_data, test_loader, criterion)
