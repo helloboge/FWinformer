@@ -243,6 +243,7 @@ class Exp_Model(Exp_Basic):
             np.save(folder_path+'vali_all_loss.npy',vali_loss)
             vali_loss = np.average(vali_loss)
             test_loss = self.vali(test_data, test_loader, criterion)
+            test_loss = np.average(test_loss)
 
             print("Epoch: {0}, Steps: {1} | Train Loss: {2:.7f} Vali Loss: {3:.7f} Test Loss: {4:.7f}".format(
                 epoch + 1, train_steps, train_loss, vali_loss, test_loss))
